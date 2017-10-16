@@ -11,18 +11,6 @@ public class CloseConnector {
     private Statement statement;
     private PreparedStatement pst;
 
-    public CloseConnector(Connection connection)
-    {
-        this.connection = connection;
-    }
-
-    public CloseConnector( Connection connection, Statement statement)
-    {
-    this.connection = connection;
-    this.statement = statement;
-
-    }
-
     public CloseConnector(Connection connection, Statement statement, PreparedStatement pst)
     {
     this.statement = statement;
@@ -33,13 +21,13 @@ public class CloseConnector {
     public void CloseAllConnection() throws SQLException {
         connection.close();
         statement.close();
-        pst.close();
+
 
 
     }
     public  void CloseAllAppartCon() throws SQLException {
         statement.close();
-        pst.close();
+
     }
 
 

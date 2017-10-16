@@ -13,7 +13,8 @@ public class Parser {
     public void SetReaderInfo(String URL)
     {
         reader = new Reader(URL);
-        parseReader = new ParseReader();
+
+        parseReader = new ParseReader(URL);
     }
 
     public void Parsing() throws IOException, SQLException {

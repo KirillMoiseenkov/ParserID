@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBWorker implements IDBWorker{
+public class DBWorker{
 
        private SetConnector setConnector;
        private Adder adder;
@@ -20,28 +20,27 @@ public class DBWorker implements IDBWorker{
 
       public DBWorker()
       {
+          setConnector = new SetConnector();
+
+
               connection = setConnector.setConnection();
-              statement = (Statement)  setConnector.setStatement();
+              statement =  setConnector.setStatement();
       }
 
 
-       @Override
        public void AddToDB(Item item) throws SQLException {
 
-              pst = connection.prepareStatement(
-                      "INSERT INTO users (name,data,href,img_href) values (?,?,?,?);");
-              pst.setString(1, item.getName());
-              pst.setString(2, item.getData());
-              pst.setString(3, item.getHref());
-              pst.setString(4, item.getImg_href());
-
-              pst.executeUpdate();
+          adder = new Adder(connection,statement,pst);
+          adder.AddToDB(item);
 
 
        }
 
-       @Override
        public void CloseDBConnection() throws SQLException {
+
+
+            closeConnector = new CloseConnector(connection,statement,pst);
+
               closeConnector.CloseAllConnection();
 
        }

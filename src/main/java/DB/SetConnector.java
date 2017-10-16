@@ -27,6 +27,9 @@ public class SetConnector {
         try {
 
            connection = DriverManager.getConnection(URLFIXED, USERNAME, PASSWORD);
+                   if(!connection.isClosed())
+                       System.out.println("true");
+            System.out.println("false");
 
             return  connection;
         } catch (SQLException e) {
@@ -34,7 +37,7 @@ public class SetConnector {
         }
             return null;
     }
-    public Connection setStatement()
+    public Statement setStatement()
     {
 
 
@@ -43,7 +46,7 @@ public class SetConnector {
 
             statement = connection.createStatement();
 
-            return  connection;
+            return  statement;
         } catch (SQLException e) {
             System.out.println("Error connection to DB with adress -" + URLFIXED + " Exeption - " + e );
         }

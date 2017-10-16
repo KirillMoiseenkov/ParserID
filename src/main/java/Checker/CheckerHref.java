@@ -7,7 +7,7 @@ public class CheckerHref {
 
     String IP;
 
-    CheckerHref(String IP)
+    public  void setIP(String IP)
     {
         this.IP = IP;
     }
