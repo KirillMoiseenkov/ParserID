@@ -1,7 +1,9 @@
+import DB.DBWorker;
 import Parser.*;
 import Checker.Checker;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
 
@@ -9,16 +11,19 @@ public class Main {
 
 
 
-
         Parser parser = new Parser();
-        parser.SetReaderInfo("C:/Users/acer-pc/IdeaProjects/exam/src/test/java/Config.txt");
+        parser.setReaderInfo("C.txt", true);
 
-    for(int i=0;i<5;i++)
+    for(int i=0;i<100;i++)
      {
+
          System.out.println("Begin I = " + i);
         Thread.sleep(5000);
-        parser.Parsing();
+        parser.parsing();
     }
+
+
+
 
     }
 

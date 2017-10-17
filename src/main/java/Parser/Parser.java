@@ -8,17 +8,15 @@ import java.sql.SQLException;
 public class Parser {
 
    private ParseReader parseReader;
-    private Reader reader;
+   private Reader reader;
 
-    public void SetReaderInfo(String URL)
-    {
+    public void setReaderInfo(String URL, boolean ExistenceOfDB) throws SQLException {
         reader = new Reader(URL);
-
-        parseReader = new ParseReader(URL);
+        parseReader = new ParseReader(ExistenceOfDB);
     }
 
-    public void Parsing() throws IOException, SQLException {
-            parseReader.Parisng(reader.getInfoHref());
+    public void parsing() throws IOException, SQLException {
+            parseReader.parisng(reader.getInfoHref(),false);
     }
 
 

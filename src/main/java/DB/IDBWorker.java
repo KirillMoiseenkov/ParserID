@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public interface IDBWorker {
 
-    void AddToDB(Item item) throws SQLException;
-    void CloseDBConnection() throws SQLException;
+    void addToDB(Item item) throws SQLException;
+    void closeDBConnection() throws SQLException;
 
 
 

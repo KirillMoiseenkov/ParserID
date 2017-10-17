@@ -11,7 +11,7 @@ public interface IReadInfo {
 
 
 
-    public Item GetInfo(Elements Ename, Elements Img, Elements Data, int Index);
-    public void Parisng(List<String> Row) throws IOException, SQLException;
+    public Item getInfo(Elements Ename, Elements Img, Elements Data, int Index);
+    public void parisng(List<String> Row, boolean mode) throws IOException, SQLException;
 
 }

@@ -2,6 +2,7 @@ package Parser;
 
 import Checker.Checker;
 import DB.DBWorker;
+import File.ReadDB;
 import Items.Item;
 import Items.ShowerItem;
 import org.jsoup.HttpStatusException;
@@ -38,24 +39,25 @@ public class ParseReader implements  IReadInfo {
 
     }
 */
-private Checker checker = new Checker();
+private Checker checker;
 private DBWorker dbWorker;
 
 
-   public String URL_config;
 
-    public ParseReader(String URL_config) {
+    public ParseReader(boolean ExistenceOfDB) throws SQLException {
 
-        checker.SetCheckData();
-        this.URL_config = URL_config;
+        checker = new Checker();
+        dbWorker = new DBWorker();
+        dbWorker.setReadDB(true);
 
 
     }
 
 
-    public void Parisng(List<String> Row) throws IOException, SQLException {
-        dbWorker = new DBWorker();
-        try {
+    public void parisng(List<String> Row, boolean mode) throws IOException, SQLException {
+
+
+try {
             int n = 0;
 
 
@@ -76,6 +78,7 @@ private DBWorker dbWorker;
                     doc = Jsoup.connect(Row.get(n) + "page-" + page).get();
                 } catch (org.jsoup.HttpStatusException e) {
 
+                    System.out.println(Row.get(n) + "page-" + page + "Is not working");
                     n++;
                     break;
 
@@ -89,16 +92,22 @@ private DBWorker dbWorker;
 
                 for (int i = 0; i < Img.size(); i++) {
 
-                    item = GetInfo(EName, Img, Data, i);
+                    item = getInfo(EName, Img, Data, i);
 
-                        if(!checker.CheckData(item.getData())) {
+                  //  System.out.println(dbWorker.readDB.addToListURL(item.getData()));
+
+
+
+                       if(dbWorker.readDB.addToListURL(item.getData())) {
+
                             ShowerItem showerItem = new ShowerItem(item);
 
                             showerItem.Show();
 
-                            dbWorker.AddToDB(item);
-                        }
-                    date = checker.CheckDate(item.getData(), 30);
+                            dbWorker.addToDB(item);
+                       }
+
+                    date = checker.checkDate(item.getData(), 30);
 
                     if (date == true)
                         break;
@@ -108,15 +117,16 @@ private DBWorker dbWorker;
 
                 n++;
             }
-            dbWorker.CloseDBConnection();
+            dbWorker.closeDBConnection();
         }
         finally {
-            dbWorker.CloseDBConnection();
+            dbWorker.closeDBConnection();
 
         }
+        mode = false;
       }
 
-    public Item GetInfo(Elements Ename, Elements Img, Elements Data, int Index) {
+    public Item getInfo(Elements Ename, Elements Img, Elements Data, int Index) {
         String img_href = "Not exist";
 
         if (!Img.get(Index).select(".e2-text-picture-imgwrapper img").isEmpty())
@@ -130,6 +140,7 @@ private DBWorker dbWorker;
                 img_href
         );
     }
+
 
 
 }

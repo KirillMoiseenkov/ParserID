@@ -18,14 +18,14 @@ public class CloseConnector {
     this.pst = pst;
     }
 
-    public void CloseAllConnection() throws SQLException {
+    public void closeAllConnection() throws SQLException {
         connection.close();
         statement.close();
 
 
 
     }
-    public  void CloseAllAppartCon() throws SQLException {
+    public  void closeAllAppartCon() throws SQLException {
         statement.close();
 
     }

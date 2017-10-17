@@ -8,7 +8,7 @@ public class CheckerDate {
 
 
 
-    public boolean Check_date(String Date, int late)
+    public boolean check_date(String Date, int late)
     {
         int end = Date.indexOf(',');
         int day;

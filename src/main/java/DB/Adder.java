@@ -21,7 +21,7 @@ public class Adder {
     }
 
 
-    public void AddToDB(Item item) throws SQLException {
+    public void addToDB(Item item) throws SQLException {
 
         pst = connection.prepareStatement(
                 "INSERT INTO users (name,data,href,img_href) values (?,?,?,?);");
